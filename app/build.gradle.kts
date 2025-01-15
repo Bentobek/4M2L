@@ -39,10 +39,18 @@ android {
         viewBinding = true
     }
 }
+
 val nav_version = "2.8.4"
 dependencies {
+
+//    Lottie
+    implementation("com.airbnb.android:lottie:6.0.0")
+    //    Navigation component
     implementation ("androidx.navigation:navigation-fragment:$nav_version")
     implementation ("androidx.navigation:navigation-ui:$nav_version")
+    //indicator tochek
+    implementation ("com.tbuonomo:dotsindicator:4.3")
+//    Android studio
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

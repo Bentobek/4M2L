@@ -1,6 +1,7 @@
 package com.example.a3m1l
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,10 +21,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container_view) as NavHostFragment
-
         navController = navHostFragment.navController
 
-        binding.bottomNavigationView.setupWithNavController(navController)
-
-        }
+        val pref = PreferncesHelper()
+        pref.unit(this)
+        if (!pref.isOnBoardShown)
+            navController.navigate(R.id.pagerItemFragment)
     }
+}

@@ -14,4 +14,8 @@ class PreferncesHelper {
     var text: String?
         get() =sharedPrefernces.getString("text" ,"")
         set(value) = sharedPrefernces.edit().putString("text", value).apply()
+
+    var isOnBoardShown: Boolean
+        get() = sharedPrefernces.getBoolean("onBoard", false)
+        set(value) = sharedPrefernces.edit().putBoolean("onBoard", value).apply()
 }
