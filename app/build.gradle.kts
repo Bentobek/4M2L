@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 
 }
 
@@ -39,17 +41,26 @@ android {
         viewBinding = true
     }
 }
-
+val room_version = "2.6.1"
 val nav_version = "2.8.4"
 dependencies {
 
 //    Lottie
     implementation("com.airbnb.android:lottie:6.0.0")
+
     //    Navigation component
     implementation ("androidx.navigation:navigation-fragment:$nav_version")
     implementation ("androidx.navigation:navigation-ui:$nav_version")
+
     //indicator tochek
     implementation ("com.tbuonomo:dotsindicator:4.3")
+
+    //ROOM
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+//    ksp("androidx.room:room-compiler:$room_version")
+//    implementation("androidx.room:room-ktx:$room_version")
+
 //    Android studio
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

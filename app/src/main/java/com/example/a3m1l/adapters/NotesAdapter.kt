@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a3m1l.databinding.NoteItemBinding
-import com.example.a3m1l.models.Notes
 import androidx.recyclerview.widget.ListAdapter
+import com.example.a3m1l.data.model.NoteEntity
 
 
-class NotesAdapter (private val notes: ArrayList<Notes>): ListAdapter<Notes,NotesAdapter.NotesViewholder>(DiffCallBack()) {
+class NotesAdapter : ListAdapter<NoteEntity,NotesAdapter.NotesViewholder>(DiffCallBack()) {
 
     private val background = listOf(
         com.example.a3m1l.R.drawable.bg_cyan,
@@ -21,8 +21,11 @@ class NotesAdapter (private val notes: ArrayList<Notes>): ListAdapter<Notes,Note
 
 
     inner class NotesViewholder(private val binding: NoteItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(note: Notes){
+        fun bind(note: NoteEntity){
             binding.tvTitle.text = note.title
+            binding.tvDescritption.text = note.description
+            binding.tvTime.text = note.time
+            binding.tvTime2.text = note.date
         }
     }
 
@@ -34,20 +37,20 @@ class NotesAdapter (private val notes: ArrayList<Notes>): ListAdapter<Notes,Note
     override fun onBindViewHolder(holder: NotesViewholder, position: Int) {
         val background = background[position % background.size]
         holder.itemView.setBackgroundResource(background)
-        holder.bind(notes[position])
+        holder.bind(getItem(position))
     }
-    class DiffCallBack: DiffUtil.ItemCallback<Notes>(){
-        override fun areItemsTheSame(oldItem: Notes, newItem: Notes): Boolean {
+    class DiffCallBack: DiffUtil.ItemCallback<NoteEntity>(){
+        override fun areItemsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {
             return oldItem==newItem
         }
 
-        override fun areContentsTheSame(oldItem: Notes, newItem: Notes): Boolean {
+        override fun areContentsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {
             return oldItem.title == newItem.title
+                    && oldItem.description == newItem.description
+                    && oldItem.time == newItem.time
+                    && oldItem.date == newItem.date
+
         }
-
     }
 
-    override fun getItemCount(): Int {
-        return notes.size
-    }
 }

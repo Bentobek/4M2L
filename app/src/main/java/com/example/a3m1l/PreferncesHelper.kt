@@ -11,9 +11,6 @@ class PreferncesHelper {
     fun unit(context: Context){
         sharedPrefernces = context.getSharedPreferences("shared", Context.MODE_PRIVATE)
     }
-    var text: String?
-        get() =sharedPrefernces.getString("text" ,"")
-        set(value) = sharedPrefernces.edit().putString("text", value).apply()
 
     var isOnBoardShown: Boolean
         get() = sharedPrefernces.getBoolean("onBoard", false)
