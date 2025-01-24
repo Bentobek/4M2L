@@ -24,7 +24,7 @@
             android:layout_height="24dp"/>
 
         <TextView
-            android:text="Все заметки"
+            android:text="@string/all_notes"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -50,7 +50,7 @@
         android:id="@+id/search"
         android:paddingStart="70dp"
         android:textColor="@color/white"
-        android:hint="Поиск заметок"
+        android:hint="@string/search"
         android:background="@drawable/bg_gray"
         android:layout_width="375dp"
         android:layout_height="50dp"/>

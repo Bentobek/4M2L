@@ -4,6 +4,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
     id("com.google.devtools.ksp")
+    alias(libs.plugins.google.gms.google.services)
 
 }
 
@@ -60,6 +61,11 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
 //    ksp("androidx.room:room-compiler:$room_version")
 //    implementation("androidx.room:room-ktx:$room_version")
+
+//Google Auth
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+    implementation(libs.firebase.auth)
+    implementation("com.google.android.gms:play-services-auth:21.3.0")
 
 //    Android studio
     implementation(libs.androidx.core.ktx)

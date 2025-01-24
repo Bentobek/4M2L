@@ -25,7 +25,6 @@ class NotesAdapter : ListAdapter<NoteEntity,NotesAdapter.NotesViewholder>(DiffCa
             binding.tvTitle.text = note.title
             binding.tvDescritption.text = note.description
             binding.tvTime.text = note.time
-            binding.tvTime2.text = note.date
         }
     }
 
@@ -48,8 +47,6 @@ class NotesAdapter : ListAdapter<NoteEntity,NotesAdapter.NotesViewholder>(DiffCa
             return oldItem.title == newItem.title
                     && oldItem.description == newItem.description
                     && oldItem.time == newItem.time
-                    && oldItem.date == newItem.date
-
         }
     }
 

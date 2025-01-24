@@ -22,7 +22,7 @@ class WriteNoteFragment : Fragment() {
     private val hundler = Handler(Looper.getMainLooper())
     private var currentData = object : Runnable {
         override fun run() {
-            val currentTime = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date())
+            val currentTime = SimpleDateFormat("dd MM HH:mm", Locale.getDefault()).format(Date())
             binding.date.text = currentTime
             hundler.postDelayed(this, 30000)
         }
@@ -31,7 +31,6 @@ class WriteNoteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentWriteNoteBinding.inflate(layoutInflater)
         return binding.root
     }

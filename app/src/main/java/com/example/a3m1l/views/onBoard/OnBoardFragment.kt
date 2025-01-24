@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.a3m1l.R.*
+import com.example.a3m1l.R.string.on_board_title3
 import com.example.a3m1l.databinding.FragmentOnBoardBinding
 
 class OnBoardFragment : Fragment() {
@@ -16,7 +18,6 @@ class OnBoardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = FragmentOnBoardBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -33,25 +34,23 @@ class OnBoardFragment : Fragment() {
                 binding.skip.setOnClickListener{
                     findNavController().navigate(PagerItemFragmentDirections.actionPagerItemFragmentToNotesFragment())
                 }
-                binding.lottiAnimationView.setAnimation(com.example.a3m1l.R.raw.first,)
-                binding.onTxt.text = "Удобство"
-                binding.onTxt2.text = "Создавайте заметки в два клика! " +
-                                      "Записывайте мысли, идеи и " +
-                                        "важные задачи мгновенно."
+                binding.lottiAnimationView.setAnimation(raw.first,)
+                binding.onTxt.text = getString(string.on_board_title)
+                binding.onTxt2.text = getString(string.on_board_description)
             }
             1 -> {
                 binding.skip.setOnClickListener{
                     findNavController().navigate(PagerItemFragmentDirections.actionPagerItemFragmentToNotesFragment())
                 }
-                binding.lottiAnimationView.setAnimation(com.example.a3m1l.R.raw.second,)
-                binding.onTxt.text = "Организация"
-                binding.onTxt2.text = "Организуйте заметки по папкам и тегам. Легко находите нужную информацию в любое время."
+                binding.lottiAnimationView.setAnimation(raw.second,)
+                binding.onTxt.text = getString(string.on_board_title2)
+                binding.onTxt2.text =getString(string.on_board_description2)
             }
             2 -> {
                 binding.skip.visibility = View.GONE
-                binding.lottiAnimationView.setAnimation(com.example.a3m1l.R.raw.third,)
-                binding.onTxt.text = "Синхронизация"
-                binding.onTxt2.text = "Синхронизация на всех устройствах. Доступ к записям в любое время и в любом месте."
+                binding.lottiAnimationView.setAnimation(raw.third,)
+                binding.onTxt.text = getString(string.on_board_title3)
+                binding.onTxt2.text = getString(string.on_board_description3)
             }
         }
     }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.a3m1l.PreferncesHelper
+import com.example.a3m1l.R
 import com.example.a3m1l.adapters.onBoardAdapter
 import com.example.a3m1l.databinding.FragmentPagerItemBinding
 
@@ -39,12 +40,12 @@ class PagerItemFragment : Fragment() {
                 binding.dotsIndicator.attachTo(binding.viewPager)
                 if (position == 2) {
                     binding.viewPagerBtn.visibility = View.VISIBLE
-                    binding.viewPagerBtn.text = "Начать"
+                    binding.viewPagerBtn.text = getString(R.string.next)
                     binding.viewPagerBtn.setOnClickListener{
                         val pref = PreferncesHelper()
                         pref.unit(requireContext())
                         pref.isOnBoardShown = true
-                        findNavController().navigate(PagerItemFragmentDirections.Companion.actionPagerItemFragmentToNotesFragment())
+                        findNavController().navigate(PagerItemFragmentDirections.Companion.actionPagerItemFragmentToSignInFragment())
                     }
                 } else  {
                     binding.viewPagerBtn.visibility = View.GONE
