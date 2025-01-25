@@ -18,4 +18,8 @@
     <string name="sign_in">Кирүү</string>
     <string name="note">Эскертүүлөр</string>
     <string name="text">Teкст</string>
+    <string name="text_massage">Сиз эскертүүлөрдү өчүрөөсүзбү?</string>
+    <string name="I_am_the_title">Эскертүүлөрдү өчүрүү</string>
+    <string name="yes">Артка кайтаруу</string>
+    <string name="no">Өчүрүү</string>
 </resources>

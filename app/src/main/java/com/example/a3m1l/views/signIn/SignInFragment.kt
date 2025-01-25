@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.a3m1l.PreferncesHelper
 import com.example.a3m1l.R
 import com.example.a3m1l.databinding.FragmentSignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -45,6 +46,9 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSignIn.setOnClickListener{
             signIn()
+        }
+        binding.btnGuest.setOnClickListener{
+            signInWithAnonim()
         }
     }
 
@@ -91,6 +95,15 @@ class SignInFragment : Fragment() {
                     updateUI(null)
                 }
             }
+    }
+
+    private fun  signInWithAnonim(){
+     binding.btnGuest.setOnClickListener{
+        val pref = PreferncesHelper()
+         pref.unit(requireContext())
+         pref.isAnonim = true
+         findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToNotesFragment())
+     }
     }
 
         private fun signIn() {

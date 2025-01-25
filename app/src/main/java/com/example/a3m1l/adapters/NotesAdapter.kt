@@ -7,9 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a3m1l.databinding.NoteItemBinding
 import androidx.recyclerview.widget.ListAdapter
 import com.example.a3m1l.data.model.NoteEntity
+import com.example.a3m1l.extension.onItemClick
 
 
-class NotesAdapter : ListAdapter<NoteEntity,NotesAdapter.NotesViewholder>(DiffCallBack()) {
+class NotesAdapter(
+//private val onItemClick: (NoteEntity)-> Unit,
+//private val onLongClick: (NoteEntity)-> Unit,
+private val customOnClick: onItemClick
+): ListAdapter<NoteEntity,NotesAdapter.NotesViewholder>(DiffCallBack()) {
 
     private val background = listOf(
         com.example.a3m1l.R.drawable.bg_cyan,
@@ -37,6 +42,13 @@ class NotesAdapter : ListAdapter<NoteEntity,NotesAdapter.NotesViewholder>(DiffCa
         val background = background[position % background.size]
         holder.itemView.setBackgroundResource(background)
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            customOnClick.onClick(getItem(position))
+        }
+        holder.itemView.setOnLongClickListener {
+            customOnClick.onLongClick(getItem(position))
+            true
+        }
     }
     class DiffCallBack: DiffUtil.ItemCallback<NoteEntity>(){
         override fun areItemsTheSame(oldItem: NoteEntity, newItem: NoteEntity): Boolean {

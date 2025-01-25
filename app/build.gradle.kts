@@ -66,6 +66,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
     implementation(libs.firebase.auth)
     implementation("com.google.android.gms:play-services-auth:21.3.0")
+    implementation ("com.google.firebase:firebase-firestore:24.10.0")
+
 
 //    Android studio
     implementation(libs.androidx.core.ktx)

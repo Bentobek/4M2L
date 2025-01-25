@@ -18,4 +18,9 @@
     <string name="sign_in">Sign In</string>
     <string name="note">Notes</string>
     <string name="text">Text</string>
+    <string name="text_massage">Are you sure you want to delete the note?</string>
+    <string name="I_am_the_title">Delete note</string>
+    <string name="yes">Cancel</string>
+    <string name="no">Delete</string>
+    <string name="guest_text" translatable="false">Guest</string>
 </resources>

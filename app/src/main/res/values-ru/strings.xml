@@ -18,4 +18,8 @@
     <string name="sign_in">Авторизация</string>
     <string name="note">Заметки</string>
     <string name="text">Текст</string>
+        <string name="text_massage">Вы точно хотите удалить заметку?</string>
+        <string name="I_am_the_title">Удалить заметку</string>
+    <string name="yes">Отмена</string>
+    <string name="no">Удалить</string>
 </resources>
