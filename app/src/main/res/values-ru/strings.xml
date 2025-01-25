@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Заметки</string>
+    <string name="search">Поиск заметок</string>
+    <string name="all_notes">Все заметки</string>
+    <string name="title">Заголовок</string>
+    <string name="default_web_client_id">92211334470-klbuig8fblt16q19jf1avpqu6dvibbl4.apps.googleusercontent.com</string>
+    <string name="you_sign_in">Вы авторизованы</string>
+    <string name="you_not_sign_in">Вы не авторизованы</string>
+    <string name="next">Начать</string>
+    <string name="on_board_title">Удобство</string>
+    <string name="on_board_description">Создавайте заметки в два клика! Записывайте мысли, идеи и важные задачи мгновенно.</string>
+    <string name="on_board_title2">Организация</string>
+    <string name="on_board_description2">Организуйте заметки по папкам и тегам. Легко находите нужную информацию в любое время.</string>
+    <string name="on_board_title3">Синхронизация</string>
+    <string name="on_board_description3">Синхронизация на всех устройствах. Доступ к записям в любое время и в любом месте.\n</string>
+    <string name="signin_button_text">Авторизация через Google</string>
+    <string name="sign_in">Авторизация</string>
+    <string name="note">Заметки</string>
+    <string name="text">Текст</string>
+</resources>

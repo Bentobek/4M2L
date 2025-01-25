@@ -58,7 +58,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="20dp"
-        android:src="@mipmap/search"
+        android:src="@drawable/sear"
         app:layout_constraintBottom_toBottomOf="@id/search"
         app:layout_constraintStart_toStartOf="@id/search"
         app:layout_constraintTop_toTopOf="@id/search" />
