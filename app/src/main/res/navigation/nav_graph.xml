@@ -24,9 +24,10 @@
             android:name="note"
             app:argType="integer"
             android:defaultValue="0"/>
-        <action
-            android:id="@+id/action_writeNoteFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="string"
+            android:defaultValue="0"/>
     </fragment>
 
     <fragment
@@ -40,7 +41,6 @@
         android:name="com.example.a3m1l.views.onBoard.PagerItemFragment"
         android:label="fragment_pager_item"
         tools:layout="@layout/fragment_pager_item" >
-
         <action
             android:id="@+id/action_pagerItemFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
@@ -49,13 +49,11 @@
             app:destination="@id/signInFragment" />
 
     </fragment>
-
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.a3m1l.views.signIn.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
-
         <action
             android:id="@+id/action_signInFragment_to_notesFragment"
             app:destination="@id/notesFragment" />

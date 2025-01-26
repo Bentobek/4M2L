@@ -16,6 +16,8 @@ import com.example.a3m1l.PreferncesHelper
 import com.example.a3m1l.data.model.NoteEntity
 import com.example.a3m1l.databinding.FragmentWriteNoteBinding
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.FieldPath.documentId
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -60,54 +62,84 @@ class WriteNoteFragment : Fragment() {
     private fun setlistener() {
         val pref = PreferncesHelper()
         pref.unit(requireContext())
-    if (pref.isAnonim){
-        binding.apply {
-            val args =  WriteNoteFragmentArgs.fromBundle(requireArguments())
-            App.appDataBase?.noteDao()?.getById(args.note)?.let {
-                etTitle.setText(it.title)
-                description.setText(it.description)
-                isEdit = true
-            }
-        }
-        binding.apply {
-            btnSave.setOnClickListener {
-                val title = etTitle.text.toString()
-                val description = description.text.toString()
-                val time = date.text.toString()
-                val note = NoteEntity(title, description, time)
-                if (isEdit ) {
+
+        if (pref.isAnonim) {
+            // Сохранение в локальную БД (Room)
+            binding.btnSave.setOnClickListener {
+                val title = binding.etTitle.text.toString()
+                val description = binding.description.text.toString()
+                val time = binding.date.text.toString()
+                val note = NoteEntity(title = title, description = description, time = time)
+
+                if (isEdit) {
                     val args = WriteNoteFragmentArgs.fromBundle(requireArguments())
                     note.id = args.note
                     App.appDataBase?.noteDao()?.update(note)
-                    findNavController().navigateUp()
                 } else {
                     App.appDataBase?.noteDao()?.insert(note)
-                    findNavController().navigateUp()
+                }
+                findNavController().navigateUp()
+            }
+        } else {
+            binding.btnSave.setOnClickListener {
+                val title = binding.etTitle.text.toString()
+                val description = binding.description.text.toString()
+                val time = binding.date.text.toString()
+
+                val noteData = hashMapOf(
+                    "title" to title,
+                    "description" to description,
+                    "time" to time
+                )
+
+                val db = Firebase.firestore
+
+                if (isEdit) {
+                    val args = WriteNoteFragmentArgs.fromBundle(requireArguments())
+                    val firestoreId = args.noteId
+
+                    if (firestoreId != null) {
+                        db.collection("notes")
+                            .document(firestoreId)
+                            .update(noteData as Map<String, Any>)
+                            .addOnSuccessListener {
+                                Log.d(TAG, "Заметка обновлена в Firestore")
+                                Toast.makeText(requireContext(), "Заметка обновлена!", Toast.LENGTH_SHORT).show()
+                                findNavController().navigateUp()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e(TAG, "Ошибка обновления заметки: ${e.message}", e)
+                                Toast.makeText(requireContext(), "Ошибка обновления", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        Log.e(TAG, "Ошибка: Firestore ID отсутствует")
+                    }
+                } else {
+                    db.collection("notes")
+                        .add(noteData)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d(TAG, "Документ создан с ID: ${documentReference.id}")
+
+                            val note = NoteEntity(
+                                firestoreId = documentReference.id,
+                                title = title,
+                                description = description,
+                                time = time
+                            )
+                            App.appDataBase?.noteDao()?.insert(note)
+
+                            Toast.makeText(requireContext(), "Заметка сохранена!", Toast.LENGTH_SHORT).show()
+                            findNavController().navigateUp()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e(TAG, "Ошибка сохранения заметки: ${e.message}", e)
+                            Toast.makeText(requireContext(), "Ошибка сохранения", Toast.LENGTH_SHORT).show()
+                        }
                 }
             }
         }
-            }else{
-        val db = Firebase.firestore
-        val note = hashMapOf(
-            "tittle" to binding.etTitle.text.toString(),
-            "description" to binding.description.toString(),
-            "time" to binding.date.text.toString(),
-        )
-        db.collection("notes")
-            .add(note)
-            .addOnSuccessListener { documentReference ->
-                Log.d(
-                    TAG,
-                    "DocumentSnapshot added with ID: ${documentReference.id}"
-                )
-                findNavController().navigateUp()
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-            }
-         }
     }
+
     companion object {
         private const val TAG = "ololo"
     }

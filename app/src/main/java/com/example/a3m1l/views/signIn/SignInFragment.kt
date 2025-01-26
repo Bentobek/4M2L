@@ -98,12 +98,10 @@ class SignInFragment : Fragment() {
     }
 
     private fun  signInWithAnonim(){
-     binding.btnGuest.setOnClickListener{
         val pref = PreferncesHelper()
          pref.unit(requireContext())
          pref.isAnonim = true
          findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToNotesFragment())
-     }
     }
 
         private fun signIn() {

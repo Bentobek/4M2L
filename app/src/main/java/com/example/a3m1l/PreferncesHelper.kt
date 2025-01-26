@@ -15,7 +15,6 @@ class PreferncesHelper {
     var isOnBoardShown: Boolean
         get() = sharedPrefernces.getBoolean("onBoard", false)
         set(value) = sharedPrefernces.edit().putBoolean("onBoard", value).apply()
-
     var isAnonim: Boolean
         get() = sharedPrefernces.getBoolean("anonim", false)
         set(value) = sharedPrefernces.edit().putBoolean("anonim", value).apply()

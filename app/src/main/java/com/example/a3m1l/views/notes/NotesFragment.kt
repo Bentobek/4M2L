@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.room.util.query
 import com.example.a3m1l.App
 import com.example.a3m1l.PreferncesHelper
 import com.example.a3m1l.R.*
@@ -20,21 +19,17 @@ import com.example.a3m1l.databinding.FragmentNotesBinding
 import com.example.a3m1l.extension.onItemClick
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import java.util.Collections.addAll
 
 class NotesFragment : Fragment(), onItemClick {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var adapter: NotesAdapter
     private var isLinear = true
-    private var noteslist: List<NoteEntity> = listOf()
-
-
+    private var noteslist: ArrayList<NoteEntity> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentNotesBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -49,11 +44,11 @@ class NotesFragment : Fragment(), onItemClick {
         adapter = NotesAdapter(this)
         binding.rvNotes.adapter = adapter
         binding.btnAdd.setOnClickListener {
-            Log.d("ololo", "click")
-            findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToWriteNoteFragment())
-            Log.e("ololo", "click")
+
+        findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToWriteNoteFragment())
 
         }
+
         binding.shape.setOnClickListener{
             adapter.apply {
                 if (isLinear){
@@ -78,45 +73,47 @@ class NotesFragment : Fragment(), onItemClick {
             })
         }
 
-    private fun getData(){
+
+    private fun getData() {
         val pref = PreferncesHelper()
         pref.unit(requireContext())
-        if (pref.isAnonim){
-      App.appDataBase?.noteDao()?.getAll()?.observe(viewLifecycleOwner){ model->
-            noteslist = model
-          adapter.submitList(noteslist)
-            adapter.notifyDataSetChanged()
+        if (pref.isAnonim) {
+            App.appDataBase?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { model ->
+                noteslist.clear()
+                noteslist.addAll(model)
+                adapter.submitList(noteslist)
             }
-        }else{
+        } else {
             val db = Firebase.firestore
             db.collection("notes")
                 .get()
                 .addOnSuccessListener { result ->
+                    noteslist.clear()
                     for (document in result) {
                         Log.d(TAG, "${document.id} => ${document.data}")
-                        val title = document.data["tittle"].toString()
+                        val title = document.data["title"].toString()
                         val description = document.data["description"].toString()
                         val time = document.data["time"].toString()
                         val note = NoteEntity(title, description, time)
-                        noteslist = listOf(note)
+                        noteslist.addAll(arrayListOf((note)))
                         adapter.submitList(noteslist)
                         adapter.notifyDataSetChanged()
                     }
                 }
-                .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents.", exception)
+                            .addOnFailureListener { e ->
+                    Log.e(TAG, "Ошибка получения заметок: ${e.message}", e)
                 }
         }
     }
     private fun filterNotes(query: String) {
         val filtrelist = noteslist.filter { note ->
-            note.title.contains(query,true) || note.title.contains(query,true)
+            note.title.contains(query,true) || note.description.contains(query,true)
             }
         adapter.submitList(filtrelist)
     }
 
     override fun onClick(note: NoteEntity) {
-        findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToWriteNoteFragment(note.id))
+        findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToWriteNoteFragment(note.firestoreId))
     }
 
     override fun onLongClick(note: NoteEntity) {
@@ -129,10 +126,19 @@ class NotesFragment : Fragment(), onItemClick {
             }
             .setNegativeButton(string.no) { dialog, which ->
                 App.appDataBase?.noteDao()?.delete(note)
+                val db = Firebase.firestore
+                db.collection("notes").document(note.id.toString())
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.e("ololo", "Document successfully deleted!")
+                    }
             }
+
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+
+
     }
     companion object {
         private const val TAG = "ololo"
