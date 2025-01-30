@@ -113,7 +113,7 @@ class NotesFragment : Fragment(), onItemClick {
     }
 
     override fun onClick(note: NoteEntity) {
-        findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToWriteNoteFragment(note.firestoreId))
+        findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToWriteNoteFragment(note.id))
     }
 
     override fun onLongClick(note: NoteEntity) {
