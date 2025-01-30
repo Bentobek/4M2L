@@ -12,7 +12,20 @@
           "package_name": "com.bento.a3m1l"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "92211334470-er9r5ja61gno26if15k2ppo049e5gdts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bento.a3m1l",
+            "certificate_hash": "99c5764081534eedb5836010f27b5d6a5b3ae166"
+          }
+        },
+        {
+          "client_id": "92211334470-klbuig8fblt16q19jf1avpqu6dvibbl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDgzkGlzM90GC61esxT-SBLgsWuoUKyHJY"

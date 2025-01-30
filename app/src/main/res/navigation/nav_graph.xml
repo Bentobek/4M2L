@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.example.a3m1l.views.notes.NotesFragment"
+        android:name="com.bento.a3m1l.views.notes.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/writeNoteFragment"
-        android:name="com.example.a3m1l.views.notes.WriteNoteFragment"
+        android:name="com.bento.a3m1l.views.notes.WriteNoteFragment"
         android:label="fragment_write_note"
         tools:layout="@layout/fragment_write_note" >
         <argument
@@ -32,13 +32,13 @@
 
     <fragment
         android:id="@+id/onBoardFragment"
-        android:name="com.example.a3m1l.views.onBoard.OnBoardFragment"
+        android:name="com.bento.a3m1l.views.onBoard.OnBoardFragment"
         android:label="fragment_on_board"
         tools:layout="@layout/fragment_on_board" />
 
     <fragment
         android:id="@+id/pagerItemFragment"
-        android:name="com.example.a3m1l.views.onBoard.PagerItemFragment"
+        android:name="com.bento.a3m1l.views.onBoard.PagerItemFragment"
         android:label="fragment_pager_item"
         tools:layout="@layout/fragment_pager_item" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.a3m1l.views.signIn.SignInFragment"
+        android:name="com.bento.a3m1l.views.signIn.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action

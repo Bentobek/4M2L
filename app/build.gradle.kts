@@ -2,18 +2,17 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-kapt")
     id("com.google.devtools.ksp")
     alias(libs.plugins.google.gms.google.services)
-
+    id("com.google.firebase.crashlytics")
 }
 
 android {
-    namespace = "com.example.a3m1l"
+    namespace = "com.bento.a3m1l"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.a3m1l"
+        applicationId = "com.bento.a3m1l"
         minSdk = 28
         targetSdk = 35
         versionCode = 1
@@ -42,33 +41,30 @@ android {
         viewBinding = true
     }
 }
-val room_version = "2.6.1"
-val nav_version = "2.8.4"
 dependencies {
 
 //    Lottie
-    implementation("com.airbnb.android:lottie:6.0.0")
+    implementation(libs.lottie)
 
     //    Navigation component
-    implementation ("androidx.navigation:navigation-fragment:$nav_version")
-    implementation ("androidx.navigation:navigation-ui:$nav_version")
+    implementation (libs.androidx.navigation.fragment)
+    implementation (libs.androidx.navigation.ui)
 
     //indicator tochek
-    implementation ("com.tbuonomo:dotsindicator:4.3")
+    implementation (libs.dotsindicator)
 
     //ROOM
-    implementation("androidx.room:room-ktx:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
-//    ksp("androidx.room:room-compiler:$room_version")
-//    implementation("androidx.room:room-ktx:$room_version")
+   ksp(libs.androidx.room.compiler)
+    implementation(libs.room.ktx)
 
-//Google Auth
-    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+// firebase
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.messaging)
-    implementation("com.google.android.gms:play-services-auth:21.3.0")
-    implementation("com.google.firebase:firebase-firestore")
-
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
 //    Android studio
     implementation(libs.androidx.core.ktx)
